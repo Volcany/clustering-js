@@ -4,8 +4,7 @@
   "devDependencies": {
     "grunt": "^0.4.4",
     "grunt-contrib-jshint": "~0.6.3",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "should": "^3.2.0-beta1"
+    "should": "^3.2.0-beta1",
+    "grunt-simple-mocha": "^0.4.0"
   }
 }
