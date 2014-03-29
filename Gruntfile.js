@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 			}
 		},
 		shell: {
-			listFolders: {
+			mochaTest: {
 				options: {
 					stdout: false
 				},
