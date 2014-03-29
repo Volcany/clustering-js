@@ -9,22 +9,18 @@ module.exports = function(grunt) {
 				quotmark: 'single'
 			}
 		},
-		simplemocha: {
-			options: {
-			  globals: ['should'],
-			  timeout: 3000,
-			  ignoreLeaks: false,
-			  ui: 'bdd',
-			  reporter: 'list'
-			},
-
-			all: { src: ['test/**/*.js'] }
+		shell: {
+			listFolders: {
+				options: {
+					stdout: false
+				},
+				command: 'mocha --reporter xunit test/* > report/test-results.xml'
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-simple-mocha');
+	grunt.loadNpmTasks('grunt-shell');
 
-
-	grunt.registerTask('default', ['jshint', 'simplemocha']);
+	grunt.registerTask('default', ['jshint', 'shell']);
 };
