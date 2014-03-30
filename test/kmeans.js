@@ -1,4 +1,4 @@
-var clustering = require('../lib/clustering');
+var clustering = require('../index.js');
 var assert = require('assert');
 var should = require('should');
 
