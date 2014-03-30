@@ -1,16 +1,16 @@
 {
-  "name": "clustering-js",
-  "version": "0.1.0",
+  "name": "clusteringjs",
+  "version": "0.1.2",
   "devDependencies": {
     "grunt": "^0.4.4",
     "grunt-contrib-jshint": "~0.6.3",
     "should": "^3.2.0-beta1",
     "grunt-simple-mocha": "^0.4.0",
-    "grunt-shell": "^0.6.4"
+    "grunt-shell": "^0.6.4",
+    "grunt-bump": "0.0.13"
   },
-  "repository" :
-  { 
-	"type" : "git", 
-	"url" : "https://github.com/Volcany/clustering-js.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Volcany/clusteringjs.git"
   }
 }
