@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 		shell: {
 			mochaTest: {
 				options: {
-					stdout: false
+					stdout: true
 				},
 				command: 'mocha --reporter xunit test/* > report/test-results.xml'
 			}

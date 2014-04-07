@@ -25,7 +25,17 @@ describe('KMeans', function(){
 		});
 	});
   
-	describe('#cluster() - error path', function(){
+	describe('#cluster() - error path 1', function(){
+		it('should throw an error', function(){		  
+			(function() {
+				var failedKmeans = new clustering.KMeans();
+
+				failedKmeans.cluster(input);
+			}).should.throw();
+		});
+	});
+  
+	describe('#cluster() - error path 2', function(){
 		it('should throw an error', function(){
 			(function() {
 				kmeans.cluster();
@@ -33,6 +43,33 @@ describe('KMeans', function(){
 		});
 	});
   
+	describe('#classify() - success path', function(){
+		it('should return a valid cluster number', function(){
+			var clusterNumber = kmeans.classify(input[0]);
+			(clusterNumber).should.be.above(-1);
+			(clusterNumber).should.be.below(k);
+		});
+	});
+	
+	describe('#classify() - error path 1', function(){
+		it('should throw an error', function(){
+			(function() {
+				kmeans.classify();
+			}).should.throw();
+		});
+	});
+	
+	describe('#classify() - error path 2', function(){
+		it('should throw an error', function(){
+			(function() {
+				var notClusteredKmeans = new clustering.KMeans(k, e);
+	
+				notClusteredKmeans.classify(input[0]);
+			}).should.throw();
+		});
+	});
+	
+	
     describe('#getClusters()', function(){
 		it('should return k clusters', function(){
 			(kmeans.getClusters().length).should.be.exactly(k);
@@ -40,16 +77,38 @@ describe('KMeans', function(){
 	});
 	
     describe('#getJson()', function(){
-		it('should return a valid JSON script', function(){
+		it('should return a valid JSON', function(){
 		  var json = JSON.parse(kmeans.getJson());
 		  
 		  (json.k).should.be.exactly(k);
-		  (json.maxError).should.be.exactly(e);
-		  (json.e).should.be.below(e);
+		  (json.error).should.be.below(e);
+		  (json.e).should.be.exactly(e);
 		  (json.ready).should.be.exactly(true);
+		  (json.loaded).should.be.exactly(true);
 		  (json.centroids.length).should.be.exactly(k);
 		  (json.clusters.length).should.be.exactly(k);
 		  (json.timestamp).should.not.be.empty;
 		});
 	});
+	
+    describe('#loadJson()', function(){
+		it('should configure a KMeans object based on a valid JSON', function(){
+		  var json = JSON.parse(kmeans.getJson());
+		  var newKmeans = new clustering.KMeans();
+		  
+		  newKmeans.loadJson(kmeans.getJson());
+		  
+		  var newJson = JSON.parse(newKmeans.getJson());
+		  
+		  (json.k).should.be.exactly(newJson.k);
+		  (json.error).should.be.exactly(newJson.error);
+		  (json.e).should.be.exactly(newJson.e);
+		  (json.ready).should.be.exactly(newJson.ready);
+		  (json.loaded).should.be.exactly(newJson.loaded);
+		  (json.centroids.length).should.be.exactly(newJson.centroids.length);
+		  (json.clusters.length).should.be.exactly(newJson.clusters.length);
+		  (newJson.timestamp).should.not.be.empty;
+		});
+	});
+
 });
